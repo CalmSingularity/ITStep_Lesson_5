@@ -99,15 +99,23 @@ bool compare (int i,int j) {
 
 
 int main(int argc, char** argv) {
-  for (size_t i = 1; i <= 1000; ++i) {  // repeats the test 1000 times
-    srand(time(0));
-    int array[1000];
-    int copy[1000];
-    generateArray(array, 1000);
-    copyArray(array, copy, 1000);
-    mergeSort(array, 1000);
-    std::sort(copy, copy + 1000, compare);
-    if (compareArrays(array, copy, 1000)) {
+  
+  srand(time(NULL));
+  const size_t N_OF_TESTS = 1000;
+  const size_t SIZE = 1000;
+  
+  for (size_t i = 1; i <= N_OF_TESTS; ++i) {
+    int array[SIZE];
+    int copy[SIZE];
+    generateArray(array, SIZE);
+    // print(array, SIZE);
+    copyArray(array, copy, SIZE);
+    mergeSort(array, SIZE);
+    std::sort(copy, copy + SIZE, compare);
+    // print(array, SIZE);
+    // print(copy, SIZE);
+
+    if (compareArrays(array, copy, SIZE)) {
       std::cout << "Test #" << i << " - OK\n";
     }
     else {
