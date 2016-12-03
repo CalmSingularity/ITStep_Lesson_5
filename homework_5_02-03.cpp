@@ -5,8 +5,8 @@
 #include <cmath>      // sqrt
 
 struct Point {
-    int x;
-    int y;
+  double x;
+  double y;
 };
 
 Point ZERO = {0.0, 0.0};
@@ -30,11 +30,8 @@ bool operator < (Point A, Point B) {
 }
 
 bool operator != (Point A, Point B) {
-  if ((A.x != B.x) || (A.y != B.y)) {
-    return true;
-  } else {
-    return false;
-  }
+  if ((A.x != B.x) || (A.y != B.y)) return true;
+  else return false;
 }
 
 void merge(Point left[], Point right[], size_t left_size, size_t right_size, Point output[]);
@@ -111,7 +108,7 @@ void generateArray(Point array[], size_t size) {
 bool compareArrays(Point A[], Point B[], size_t size) {
   for (size_t i = 0; i < size; ++i) {
     if (A[i] != B[i]) {
-      const float ERROR = 0.01;
+      const float ERROR = 0.0001;
       std::cout << "--- Arrays mismatch in position " << i << ":\n";
       double A_to_zero = distance(A[i], ZERO);
       double B_to_zero = distance(B[i], ZERO);
@@ -132,7 +129,7 @@ bool compareArrays(Point A[], Point B[], size_t size) {
 int main(int argc, char** argv) {
   
   const size_t N_OF_TESTS = 100;
-  srand(time(NULL));
+  // srand(time(NULL));
 
   for (size_t i = 1; i <= N_OF_TESTS; ++i) {  
     size_t size = rand();

@@ -3,7 +3,7 @@
 #include <cstdlib>    // std::srand
 #include <ctime>      // time
 
-void insertionSort (int array[], size_t size) {
+void insertionSort(int array[], size_t size) {
   for (size_t i = 1; i < size; ++i) {
     int key = array[i];
     int j = i - 1;
@@ -113,7 +113,7 @@ bool compareArrays(int A[], int B[], size_t size) {
 
 int main(int argc, char** argv) {
   
-  srand(time(NULL));
+  // srand(time(NULL));
   const size_t N_OF_TESTS = 100;
   
   for (size_t i = 1; i <= N_OF_TESTS; ++i) {

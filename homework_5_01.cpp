@@ -100,7 +100,7 @@ bool compare (int i,int j) {
 
 int main(int argc, char** argv) {
   
-  srand(time(NULL));
+  // srand(time(NULL));
   const size_t N_OF_TESTS = 1000;
   const size_t SIZE = 1000;
   

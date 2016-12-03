@@ -33,36 +33,46 @@ double distance(Point A, Point B) {
 
 const Point ZERO = {0.0, 0.0, 0.0};
 
+std::istream& operator >> (std::istream& in, Point& A) {
+  std::cin >> A.x >> A.y >> A.z;
+  return in;
+}
+
 bool operator > (Point A, Point B) {
-    return distance(A, ZERO) > distance(B, ZERO);
+  return distance(A, ZERO) > distance(B, ZERO);
 }
 
 bool operator < (Point A, Point B) {
-    return distance(A, ZERO) < distance(B, ZERO);
-}
-
-bool operator <= (Point A, Point B) {
-    return distance(A, ZERO) <= distance(B, ZERO);
+  return !(A > B);
 }
 
 bool operator >= (Point A, Point B) {
-    return distance(A, ZERO) >= distance(B, ZERO);
+  return distance(A, ZERO) >= distance(B, ZERO);
+}
+
+bool operator <= (Point A, Point B) {
+  return !(A >= B);
 }
 
 bool operator == (Point A, Point B) {
-    return distance(A, ZERO) == distance(B, ZERO);
+  return distance(A, ZERO) == distance(B, ZERO);
 }
+
 bool operator != (Point A, Point B) {
-    return distance(A, ZERO) != distance(B, ZERO);
+  return !(A == B);
 }
 
 
 template <typename T>
-void enterAndSearch(T array[], size_t size) {
+void enterArray(T array[], size_t size) {
   std::cout << "Enter a sorted array: ";
   for (size_t i = 0; i < size; ++i) {
     std::cin >> array[i];
   }
+}
+
+template <typename T>
+void searchForEnteredKey(T array[], size_t size) {
   T key;
   std::cout << "Enter a key for binary search: ";
   std::cin >> key;
@@ -75,23 +85,6 @@ void enterAndSearch(T array[], size_t size) {
   std::cout << std::endl;
 }
 
-void enterAndSearch(Point array[], size_t size) {
-  std::cout << "Enter a sorted array of 3D points:\n";
-  for (size_t i = 0; i < size; ++i) {
-    std::cout << i + 1 << ") ";
-    std::cin >> array[i].x >> array[i].y >> array[i].z;
-  }
-  Point key;
-  std::cout << "Enter a key for binary search: ";
-  std::cin >> key.x >> key.y >> key.z;
-  size_t key_index = binarySearch(array, size, key);
-  if (key_index == -1) {
-    std::cout << "The key is not found\n";
-  } else {
-    std::cout << "The key is found in the array in position " << key_index << "\n";
-  }
-  std::cout << std::endl;
-} 
 
 int main(int argc, char** argv) {
   size_t size;
@@ -101,19 +94,23 @@ int main(int argc, char** argv) {
 
   char array_char[size];
   std::cout << "Binary search of CHARS.\n";
-  enterAndSearch(array_char, size);
+  enterArray(array_char, size);
+  searchForEnteredKey(array_char, size);
 
   int array_int[size];
   std::cout << "Binary search of INTEGERS.\n";
-  enterAndSearch(array_int, size);
+  enterArray(array_int, size);
+  searchForEnteredKey(array_int, size);
 
   double array_double[size];
   std::cout << "Binary search of DOUBLES.\n";
-  enterAndSearch(array_double, size);
+  enterArray(array_double, size);
+  searchForEnteredKey(array_double, size);
 
   Point array_point[size];
   std::cout << "Binary search of POINTS.\n";
-  enterAndSearch(array_point, size);
+  enterArray(array_point, size);
+  searchForEnteredKey(array_point, size);
 
   return 0;
 }

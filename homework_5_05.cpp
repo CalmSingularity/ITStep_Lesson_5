@@ -102,7 +102,7 @@ void generateArray(int array[], size_t size) {
 
 int main(int argc, char** argv) {
   
-  srand(time(NULL));  // initialize random number generator
+  // srand(time(NULL));  // not initialize random number generator for stress-testing
   clock_t start;
   
   const size_t MAX_N_ARRAYS = 5000;  // empirically found that generating more than 5000 arrays can cause the programm to crash (depending on the platform)
