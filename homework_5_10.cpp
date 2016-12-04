@@ -38,20 +38,20 @@ std::istream& operator >> (std::istream& in, Point& A) {
   return in;
 }
 
-bool operator > (Point A, Point B) {
-  return distance(A, ZERO) > distance(B, ZERO);
-}
-
 bool operator < (Point A, Point B) {
-  return !(A > B);
+  return distance(A, ZERO) < distance(B, ZERO);
 }
 
-bool operator >= (Point A, Point B) {
-  return distance(A, ZERO) >= distance(B, ZERO);
+bool operator > (Point A, Point B) {
+  return !(A < B);
 }
 
 bool operator <= (Point A, Point B) {
-  return !(A >= B);
+  return distance(A, ZERO) <= distance(B, ZERO);
+}
+
+bool operator >= (Point A, Point B) {
+  return !(A <= B);
 }
 
 bool operator == (Point A, Point B) {

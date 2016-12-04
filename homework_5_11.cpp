@@ -37,56 +37,59 @@ double distance(Point A, Point B) {
 
 const Point ZERO = {0.0, 0.0, 0.0};
 
-bool operator > (Point A, Point B) {
-    return distance(A, ZERO) > distance(B, ZERO);
+bool operator < (Point A, Point B) {
+  return distance(A, ZERO) < distance(B, ZERO);
 }
 
-bool operator < (Point A, Point B) {
-    return distance(A, ZERO) < distance(B, ZERO);
+bool operator > (Point A, Point B) {
+  return !(A < B);
 }
 
 bool operator <= (Point A, Point B) {
-    return distance(A, ZERO) <= distance(B, ZERO);
+  return distance(A, ZERO) <= distance(B, ZERO);
 }
 
 bool operator >= (Point A, Point B) {
-    return distance(A, ZERO) >= distance(B, ZERO);
+  return !(A <= B);
 }
 
 bool operator == (Point A, Point B) {
-    return distance(A, ZERO) == distance(B, ZERO);
+  return distance(A, ZERO) == distance(B, ZERO);
 }
+
 bool operator != (Point A, Point B) {
-    return distance(A, ZERO) != distance(B, ZERO);
+  return !(A == B);
 }
 
 
-void getRandom(int* x) {
-  *x = rand();
-  return;
+template <typename T>
+T getRandom() {}
+
+template <>
+int getRandom<int>() {
+  return rand();
 }
 
-void getRandom(double* x) {
-  *x = (double) rand() / rand();
-  return; 
+template <>
+double getRandom<double>() {
+  return (double) rand() / rand(); 
 }
 
-void getRandom(char* x) {
-  *x = rand() % 94 + 32; // using ASCII characters from 32 to 126
-  return;
+template <>
+char getRandom<char>() { 
+  return rand() % 94 + 32; // using ASCII characters from 32 to 126
 }
 
-void getRandom(Point* x) {
-  getRandom(&(x->x));
-  getRandom(&(x->y));
-  getRandom(&(x->z));
-  return;
+template <>
+Point getRandom<Point>() {
+  return {getRandom<double>(), getRandom<double>(), getRandom<double>()};
 }
+
 
 template <typename T>
 void generateArray(T array[], size_t size) {
   for (size_t i = 0; i < size; ++i) {
-    getRandom(&array[i]);
+    array[i] = getRandom<T>();
   }
 }
 
@@ -109,8 +112,7 @@ bool generateAndTest(size_t n_of_tests) {
     std::sort(array, array + size);
     copyArray(array, copy, size);
 
-    T key;
-    getRandom(&key);
+    T key = getRandom<T>();
     if (binarySearch(array, size, key) == std::binary_search(array, array + size, key)) {
       std::cout << "Test #" << i << " - OK\n";      
     } else {
@@ -126,7 +128,7 @@ bool generateAndTest(size_t n_of_tests) {
 
 
 int main(int argc, char** argv) {
-  srand(time(NULL));
+  // srand(time(NULL));
 
   size_t n_of_tests;
   std::cout << "Enter the number of tests: ";
