@@ -10,7 +10,8 @@ bool binarySearch(T array[], size_t size, T x) {
   size_t left = 0;
   size_t right = size - 1;
   while (true) {
-    middle = (left + right) / 2;
+    // middle = (left + right) / 2;
+    middle = left + (right - left) / 2; 
     if (x < array[middle]) {
       right = middle - 1;
     } else if (x > array[middle]) {
@@ -41,16 +42,16 @@ bool operator < (Point A, Point B) {
   return distance(A, ZERO) < distance(B, ZERO);
 }
 
-bool operator > (Point A, Point B) {
+bool operator >= (Point A, Point B) {
   return !(A < B);
 }
 
-bool operator <= (Point A, Point B) {
-  return distance(A, ZERO) <= distance(B, ZERO);
+bool operator > (Point A, Point B) {
+  return distance(A, ZERO) > distance(B, ZERO);
 }
 
-bool operator >= (Point A, Point B) {
-  return !(A <= B);
+bool operator <= (Point A, Point B) {
+  return !(A > B);
 }
 
 bool operator == (Point A, Point B) {

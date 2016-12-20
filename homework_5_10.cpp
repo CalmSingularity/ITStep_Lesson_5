@@ -42,16 +42,16 @@ bool operator < (Point A, Point B) {
   return distance(A, ZERO) < distance(B, ZERO);
 }
 
-bool operator > (Point A, Point B) {
+bool operator >= (Point A, Point B) {
   return !(A < B);
 }
 
-bool operator <= (Point A, Point B) {
-  return distance(A, ZERO) <= distance(B, ZERO);
+bool operator > (Point A, Point B) {
+  return distance(A, ZERO) > distance(B, ZERO);
 }
 
-bool operator >= (Point A, Point B) {
-  return !(A <= B);
+bool operator <= (Point A, Point B) {
+  return !(A > B);
 }
 
 bool operator == (Point A, Point B) {
